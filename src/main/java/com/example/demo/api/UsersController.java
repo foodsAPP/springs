@@ -16,8 +16,6 @@ import com.example.demo.model.Users;
 import com.example.demo.service.UsersService;
 
 
-
-
 @RestController
 @RequestMapping("/user")
 public class UsersController {
