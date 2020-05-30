@@ -16,7 +16,7 @@ import com.example.demo.service.UsersService;
 @Component
 public class AuthInterceptor implements HandlerInterceptor{
 	@Autowired
-	private UsersService userservice;      
+	private UsersService userservice;       
 	private static final Logger logger=
 			LoggerFactory.getLogger(AuthInterceptor.class);
 	@Override
