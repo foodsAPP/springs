@@ -12,7 +12,7 @@ import com.fasterxml.jackson.annotation.JsonFormat;
  * @author ASUS
  *
  */
-public class User implements Serializable {
+public class Users implements Serializable {
 	private static final long serialVersionUID = 8425746230705180748L;
 	public static final String CACHE_NAME = "users";
 	@Id
@@ -105,7 +105,7 @@ public class User implements Serializable {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		User other = (User) obj;
+		Users other = (Users) obj;
 		if (birthday == null) {
 			if (other.birthday != null)
 				return false;
