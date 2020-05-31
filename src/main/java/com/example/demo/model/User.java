@@ -8,11 +8,11 @@ import org.springframework.data.annotation.Id;
 import com.fasterxml.jackson.annotation.JsonFormat;
 
 /**
- * ÓÃ»§Ä£ÐÍÀà
+ * ç”¨æˆ·æ¨¡åž‹ç±»ã€‚
  * @author ASUS
  *
  */
-public class Users implements Serializable {
+public class User implements Serializable {
 	private static final long serialVersionUID = 8425746230705180748L;
 	public static final String CACHE_NAME = "users";
 	@Id
@@ -105,7 +105,7 @@ public class Users implements Serializable {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		Users other = (Users) obj;
+		User other = (User) obj;
 		if (birthday == null) {
 			if (other.birthday != null)
 				return false;

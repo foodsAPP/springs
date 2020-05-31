@@ -37,7 +37,7 @@ public class CookbookController {
 		List<Cookbook>  books= service.getAllChannel();
 			return books;
 		}
-//	获取一个指定频道
+//	获取一个指定菜谱
 	@GetMapping("/{id}")
 	public  Cookbook  getChannel(@PathVariable String id) {
 		Cookbook c=service.getChannel(id);
@@ -45,15 +45,15 @@ public class CookbookController {
 		if(c!=null) {
 			return c;
 		}else {
-			logger.error("找不到指定频道");
+			logger.error("找不到指定菜谱");
 			return null;
 		}
 		
 	}
-//	删除一个指定频道
+//	删除一个指定菜谱
 	@DeleteMapping("/{id}")
  public ResponseEntity<String> deleteChannel(@PathVariable String id){
-		System.out.println("即将删除指定频道,id="+id);
+		System.out.println("即将删除指定菜谱,id="+id);
 		boolean result=service.deleteChannel(id);
 		if(result) {
 			return ResponseEntity.ok().body("删除成功");
@@ -62,16 +62,16 @@ public class CookbookController {
 		}
 	 
  }
-//	新建一个频道
+//	新建一个菜谱
 	@PostMapping
 	public Cookbook createCookbook(@RequestBody Cookbook c) {
-		System.out.println("即将创建频道"+c);
+		System.out.println("即将创建菜谱"+c);
 		Cookbook saved=service.createCookbook(c);
 		return saved;
 	}
 	@PutMapping
 	public Cookbook updateCookbook(@RequestBody Cookbook c) {
-		System.out.println("即将更新频道"+c);
+		System.out.println("即将更新菜谱"+c);
 		Cookbook update=service.updateCookbook(c);
 		return update;
 	}
