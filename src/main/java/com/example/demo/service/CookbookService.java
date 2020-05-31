@@ -27,12 +27,12 @@ public class CookbookService {
 	private CookbookRepository repo;
 
 	public List<Cookbook> getAllChannel() {
-		logger.info("准备返回从数据库中正在返回打印全部信息：");
+		logger.info("鍑嗗杩斿洖浠庢暟鎹簱涓鍦ㄨ繑鍥炴墦鍗板叏閮ㄤ俊鎭細");
 		 return repo.findAll();
 	}
 	@Cacheable("cookbooks")
 	public Cookbook getChannel(String id) {
-		logger.info("准备从数据库中正在返回打印全部信息："+id);
+		logger.info("鍑嗗浠庢暟鎹簱涓鍦ㄨ繑鍥炴墦鍗板叏閮ㄤ俊鎭細"+id);
 		Optional<Cookbook> result=repo.findById(id);
 			   if (result.isPresent()) {
 				   return result.get();

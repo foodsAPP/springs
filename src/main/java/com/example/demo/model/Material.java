@@ -1,13 +1,13 @@
 package com.example.demo.model;
 
 /**
- * ²ËÆ×Ô­ÁÏÄ£ĞÍÀà
+ * èœè°±åŸæ–™æ¨¡å‹ç±»
  * @author ASUS
  *
  */
 public class Material {
-	private String ingredients; //²ËÆ×Ê³²Ä
-	private String dosage; //²ËÆ×Ê³²ÄÓÃÁ¿
+	private String ingredients; //èœè°±é£Ÿæ
+	private String dosage; //èœè°±é£Ÿæç”¨é‡
 	public String getIngredients() {
 		return ingredients;
 	}

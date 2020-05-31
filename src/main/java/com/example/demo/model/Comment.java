@@ -5,7 +5,7 @@ import java.time.LocalDateTime;
 import com.fasterxml.jackson.annotation.JsonFormat;
 
 /**
- * ²ËÆ×ÆÀÂÛÄ£ĞÍÀà
+ * èœè°±è¯„è®ºæ¨¡å‹ç±»
  * @author ASUS
  *
  */
@@ -14,7 +14,7 @@ public class Comment {
 	private String content;
 	@JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
 	private LocalDateTime dt = LocalDateTime.now();
-	private int star = 0;//µãÔŞÁ¿
+	private int star = 0;//ç‚¹èµé‡
 	
 	public int getStar() {
 		return star;

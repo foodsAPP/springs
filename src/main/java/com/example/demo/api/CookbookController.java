@@ -30,55 +30,55 @@ public class CookbookController {
 	private CookbookService service;
 //	@Autowired
 //	private UsersService userservice;
-	//²é¿´²ËÆ×Ê×Ò³ËùÓĞ²ËÆ×
+	//æŸ¥çœ‹èœè°±é¦–é¡µæ‰€æœ‰èœè°±
 	@GetMapping
 	public List<Cookbook> getAllcookbook() {
-		logger.info("ÕıÔÚ·µ»Ø´òÓ¡È«²¿ĞÅÏ¢");
+		logger.info("æ­£åœ¨è¿”å›æ‰“å°å…¨éƒ¨ä¿¡æ¯");
 		List<Cookbook>  books= service.getAllChannel();
 			return books;
 		}
-//	»ñÈ¡Ò»¸öÖ¸¶¨ÆµµÀ
+//	è·å–ä¸€ä¸ªæŒ‡å®šé¢‘é“
 	@GetMapping("/{id}")
 	public  Cookbook  getChannel(@PathVariable String id) {
 		Cookbook c=service.getChannel(id);
-		logger.info("ÕıÔÚ´òÓ¡"+id+"ĞÅÏ¢£º");
+		logger.info("æ­£åœ¨æ‰“å°"+id+"ä¿¡æ¯ï¼š");
 		if(c!=null) {
 			return c;
 		}else {
-			logger.error("ÕÒ²»µ½Ö¸¶¨ÆµµÀ");
+			logger.error("æ‰¾ä¸åˆ°æŒ‡å®šé¢‘é“");
 			return null;
 		}
 		
 	}
-//	É¾³ıÒ»¸öÖ¸¶¨ÆµµÀ
+//	åˆ é™¤ä¸€ä¸ªæŒ‡å®šé¢‘é“
 	@DeleteMapping("/{id}")
  public ResponseEntity<String> deleteChannel(@PathVariable String id){
-		System.out.println("¼´½«É¾³ıÖ¸¶¨ÆµµÀ,id="+id);
+		System.out.println("å³å°†åˆ é™¤æŒ‡å®šé¢‘é“,id="+id);
 		boolean result=service.deleteChannel(id);
 		if(result) {
-			return ResponseEntity.ok().body("É¾³ı³É¹¦");
+			return ResponseEntity.ok().body("åˆ é™¤æˆåŠŸ");
 		}else {
-			return ResponseEntity.ok().body("É¾³ıÊ§°Ü");
+			return ResponseEntity.ok().body("åˆ é™¤å¤±è´¥");
 		}
 	 
  }
-//	ĞÂ½¨Ò»¸öÆµµÀ
+//	æ–°å»ºä¸€ä¸ªé¢‘é“
 	@PostMapping
 	public Cookbook createCookbook(@RequestBody Cookbook c) {
-		System.out.println("¼´½«´´½¨ÆµµÀ"+c);
+		System.out.println("å³å°†åˆ›å»ºé¢‘é“"+c);
 		Cookbook saved=service.createCookbook(c);
 		return saved;
 	}
 	@PutMapping
 	public Cookbook updateCookbook(@RequestBody Cookbook c) {
-		System.out.println("¼´½«¸üĞÂÆµµÀ"+c);
+		System.out.println("å³å°†æ›´æ–°é¢‘é“"+c);
 		Cookbook update=service.updateCookbook(c);
 		return update;
 	}
-	//Í¨¹ı²ËÆ×±êÌâ»ñÈ¡²ËÆ×
+	//é€šè¿‡èœè°±æ ‡é¢˜è·å–èœè°±
 	@GetMapping("/s/{title}")
 	public List<Cookbook> searchTitle(@PathVariable String title) {
-		System.out.println("¼´½«Ñ°ÕÒ±êÌâ"+title);
+		System.out.println("å³å°†å¯»æ‰¾æ ‡é¢˜"+title);
 		List<Cookbook> t=service.searchTitle(title);
 		return t;
 	}
@@ -88,35 +88,35 @@ public class CookbookController {
 		return service.getLastLocalDateTimeChannel();
 	}
 	
-	//ĞÂÔö²ËÆ×²ÄÁÏ
+	//æ–°å¢èœè°±ææ–™
 		@PostMapping("/{channelId}/material")
 		public Cookbook addMaterial(@PathVariable String channelId,@RequestBody Material material){
 			Cookbook cmaterial = null;
-			//°ÑÆÀÂÛ±£´æµ½Êı¾İ¿â
-	logger.debug("½«ÎªÆµµÀ"+channelId+"ĞÂÔöÒ»ÌõÆÀÂÛ"+material);
+			//æŠŠè¯„è®ºä¿å­˜åˆ°æ•°æ®åº“
+	logger.debug("å°†ä¸ºé¢‘é“"+channelId+"æ–°å¢ä¸€æ¡è¯„è®º"+material);
 	return service.addMaterial(channelId, material);
 		}
 	
-	//ĞÂÔö²ËÆ×²½Öè
+	//æ–°å¢èœè°±æ­¥éª¤
 		@PostMapping("/{channelId}/step")
 		public Cookbook addStep(@PathVariable String channelId,@RequestBody Step step){
 			Cookbook cstep = null;
-			//°ÑÆÀÂÛ±£´æµ½Êı¾İ¿â
-	logger.debug("½«ÎªÆµµÀ"+channelId+"ĞÂÔöÒ»ÌõÆÀÂÛ"+step);
+			//æŠŠè¯„è®ºä¿å­˜åˆ°æ•°æ®åº“
+	logger.debug("å°†ä¸ºé¢‘é“"+channelId+"æ–°å¢ä¸€æ¡è¯„è®º"+step);
 	return service.addStep(channelId, step);
 		}
-	//ĞÂÔö²ËÆ×ÆÀÂÛ
+	//æ–°å¢èœè°±è¯„è®º
 	@PostMapping("/{channelId}/comment")
 	public Cookbook addComment(@PathVariable String channelId,@RequestBody Comment comment){
 		Cookbook result = null;
-		//°ÑÆÀÂÛ±£´æµ½Êı¾İ¿â
-logger.debug("½«ÎªÆµµÀ"+channelId+"ĞÂÔöÒ»ÌõÆÀÂÛ"+comment);
+		//æŠŠè¯„è®ºä¿å­˜åˆ°æ•°æ®åº“
+logger.debug("å°†ä¸ºé¢‘é“"+channelId+"æ–°å¢ä¸€æ¡è¯„è®º"+comment);
 return service.addComment(channelId, comment);
 	}
-	//»ñÈ¡²ËÆ×µÄÈÈÃÅÆÀÂÛ
+	//è·å–èœè°±çš„çƒ­é—¨è¯„è®º
 	@GetMapping("/{channelId}/hotcomments")
 	public List<Comment> hotComments(@PathVariable String channelId){
-		logger.debug("»ñÈ¡ÈÈÃÅÆÀÂÛ½µÎªÆµµÀ"+channelId);
+		logger.debug("è·å–çƒ­é—¨è¯„è®ºé™ä¸ºé¢‘é“"+channelId);
 		List<Comment> hotcomment=service.hotComments(channelId);
 		return hotcomment;
 //		return service.hotComments();

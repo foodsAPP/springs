@@ -1,13 +1,13 @@
 package com.example.demo.model;
 
 /**
- * ²ËÆ×²½ÖèÄ£ĞÍÀà
+ * èœè°±æ­¥éª¤æ¨¡å‹ç±»
  * @author ASUS
  *
  */
 public class Step {
-	private String stitle; //²ËÆ×²½Öè±êÌâ
-	private String scontent; //²ËÆ×²½ÖèÄÚÈİ
+	private String stitle; //èœè°±æ­¥éª¤æ ‡é¢˜
+	private String scontent; //èœè°±æ­¥éª¤å†…å®¹
 	public String getStitle() {
 		return stitle;
 	}
