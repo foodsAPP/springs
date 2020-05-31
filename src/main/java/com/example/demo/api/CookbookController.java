@@ -17,10 +17,9 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.example.demo.model.Comment;
 import com.example.demo.model.Cookbook;
+import com.example.demo.model.Material;
+import com.example.demo.model.Step;
 import com.example.demo.service.CookbookService;
-import com.example.demo.service.UsersService;
-
-
 
 @RestController
 @RequestMapping("/cookbook")
@@ -29,30 +28,28 @@ public class CookbookController {
 			LoggerFactory.getLogger(CookbookController.class);
 	@Autowired
 	private CookbookService service;
-	@Autowired
-	private UsersService userservice;
+//	@Autowired
+//	private UsersService userservice;
 	//查看菜谱首页所有菜谱
 	@GetMapping
 	public List<Cookbook> getAllcookbook() {
 		logger.info("正在返回打印全部信息");
 		List<Cookbook>  books= service.getAllChannel();
 			return books;
-			
 		}
 //	获取一个指定频道
 	@GetMapping("/{id}")
-	public  Cookbook getChannel(@PathVariable String id) {
-		logger.info("正在打印"+id);
-		Cookbook  result =new Cookbook();
-		Cookbook c = service.getChannel(id);
-		if (c != null) {
-			result.getClass();
-		} else {
-			logger.error("找不到指定的频道。");
+	public  Cookbook  getChannel(@PathVariable String id) {
+		Cookbook c=service.getChannel(id);
+		logger.info("正在打印"+id+"信息：");
+		if(c!=null) {
+			return c;
+		}else {
+			logger.error("找不到指定频道");
+			return null;
 		}
-		return result;
+		
 	}
-	
 //	删除一个指定频道
 	@DeleteMapping("/{id}")
  public ResponseEntity<String> deleteChannel(@PathVariable String id){
@@ -65,21 +62,19 @@ public class CookbookController {
 		}
 	 
  }
-//	新建一个菜谱
+//	新建一个频道
 	@PostMapping
-	public Cookbook createChannel1(@RequestBody Cookbook c) {
+	public Cookbook createCookbook(@RequestBody Cookbook c) {
 		System.out.println("即将创建频道"+c);
-		Cookbook saved=service.createChannel(c);
+		Cookbook saved=service.createCookbook(c);
 		return saved;
 	}
-//	新建一个菜谱
 	@PutMapping
-	public Cookbook updateChannel(@RequestBody Cookbook c) {
+	public Cookbook updateCookbook(@RequestBody Cookbook c) {
 		System.out.println("即将更新频道"+c);
-		Cookbook update=service.updateChannel(c);
+		Cookbook update=service.updateCookbook(c);
 		return update;
 	}
-	
 	//通过菜谱标题获取菜谱
 	@GetMapping("/s/{title}")
 	public List<Cookbook> searchTitle(@PathVariable String title) {
@@ -87,13 +82,30 @@ public class CookbookController {
 		List<Cookbook> t=service.searchTitle(title);
 		return t;
 	}
-	
 	//
 	@GetMapping("/hot")
 	public List<Cookbook> gethotChannel() {
 		return service.getLastLocalDateTimeChannel();
 	}
-	//获取菜谱评论
+	
+	//新增菜谱材料
+		@PostMapping("/{channelId}/material")
+		public Cookbook addMaterial(@PathVariable String channelId,@RequestBody Material material){
+			Cookbook cmaterial = null;
+			//把评论保存到数据库
+	logger.debug("将为频道"+channelId+"新增一条评论"+material);
+	return service.addMaterial(channelId, material);
+		}
+	
+	//新增菜谱步骤
+		@PostMapping("/{channelId}/step")
+		public Cookbook addStep(@PathVariable String channelId,@RequestBody Step step){
+			Cookbook cstep = null;
+			//把评论保存到数据库
+	logger.debug("将为频道"+channelId+"新增一条评论"+step);
+	return service.addStep(channelId, step);
+		}
+	//新增菜谱评论
 	@PostMapping("/{channelId}/comment")
 	public Cookbook addComment(@PathVariable String channelId,@RequestBody Comment comment){
 		Cookbook result = null;

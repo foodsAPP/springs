@@ -15,6 +15,8 @@ import org.springframework.stereotype.Service;
 import com.example.demo.dao.CookbookRepository;
 import com.example.demo.model.Comment;
 import com.example.demo.model.Cookbook;
+import com.example.demo.model.Material;
+import com.example.demo.model.Step;
 
 @Service
 public class CookbookService {
@@ -44,11 +46,11 @@ public class CookbookService {
 		 return result;
 	}
 	
-	public Cookbook createChannel(Cookbook c) {
+	public Cookbook createCookbook(Cookbook c) {
 		 return repo.save(c);
 	}
 	
-	public Cookbook updateChannel(Cookbook c) {
+	public Cookbook updateCookbook(Cookbook c) {
 		Cookbook saved=getChannel(c.getId());
 		if(saved != null) {
 			if(c.getTitle() != null) {
@@ -56,6 +58,16 @@ public class CookbookService {
 			}
 			if(c.getMaked() != null) {
 				saved.setMaked(c.getMaked());
+			}
+			if(c.getMaterial()!=null) {
+				saved.getMaterial().addAll(c.getMaterial());
+			}else {
+				saved.setComments(c.getComments());
+			}
+			if(c.getStep()!=null) {
+				saved.getStep().addAll(c.getStep());
+			}else {
+				saved.setComments(c.getComments());
 			}
 			if(c.getComments()!=null) {
 				saved.getComments().addAll(c.getComments());
@@ -113,6 +125,29 @@ public class CookbookService {
 	    }
 	    return null;
 	}
+	public Cookbook addMaterial(String channelId, Material material) {
+		Cookbook saved=getChannel(channelId);
+	    if(saved != null) {
+	    	if(saved.getMaterial()==null) {
+				saved.setMaterial(new ArrayList<>());
+			}
+	    	saved.getMaterial().add(material);
+	    	return repo.save(saved);
+	    }
+	    return null;
+	}
+	public Cookbook addStep(String channelId, Step step) {
+		Cookbook saved=getChannel(channelId);
+	    if(saved != null) {
+	    	if(saved.getStep()==null) {
+				saved.setStep(new ArrayList<>());
+			}
+	    	saved.getStep().add(step);
+	    	return repo.save(saved);
+	    }
+	    return null;
+	}
+
 	
 	
 }

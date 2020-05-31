@@ -22,11 +22,25 @@ public class Cookbook implements Serializable {
 	private String title;
 	private String cover; //菜谱封面
 	private String maked; //菜谱被做过次数
-	private int cstar ; //菜谱被点赞数
+	private int cstar; //菜谱被点赞数
 	private List<Comment> comments; //菜谱评论
-	private List<Content> contents; //菜谱主体内容（原料+步骤）
+	private List<Material> materials;
+	private List<Step> steps;
+	public List<Material> getMaterial() {
+		return materials;
+	}
+	public void setMaterial(List<Material> material) {
+		this.materials = material;
+	}
+	public List<Step> getStep() {
+		return steps;
+	}
+	public void setStep(List<Step> step) {
+		this.steps = step;
+	}
 	@JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
 	private LocalDateTime dt = LocalDateTime.now(); //菜谱上传时间
+
 	public String getId() {
 		return id;
 	}
@@ -63,12 +77,6 @@ public class Cookbook implements Serializable {
 	public void setComments(List<Comment> comments) {
 		this.comments = comments;
 	}
-	public List<Content> getContents() {
-		return contents;
-	}
-	public void setContents(List<Content> contents) {
-		this.contents = contents;
-	}
 	public LocalDateTime getDt() {
 		return dt;
 	}
@@ -80,7 +88,6 @@ public class Cookbook implements Serializable {
 		final int prime = 31;
 		int result = 1;
 		result = prime * result + ((comments == null) ? 0 : comments.hashCode());
-		result = prime * result + ((contents == null) ? 0 : contents.hashCode());
 		result = prime * result + ((cover == null) ? 0 : cover.hashCode());
 		result = prime * result + cstar;
 		result = prime * result + ((dt == null) ? 0 : dt.hashCode());
@@ -102,11 +109,6 @@ public class Cookbook implements Serializable {
 			if (other.comments != null)
 				return false;
 		} else if (!comments.equals(other.comments))
-			return false;
-		if (contents == null) {
-			if (other.contents != null)
-				return false;
-		} else if (!contents.equals(other.contents))
 			return false;
 		if (cover == null) {
 			if (other.cover != null)
@@ -140,7 +142,8 @@ public class Cookbook implements Serializable {
 	@Override
 	public String toString() {
 		return "Cookbook [id=" + id + ", title=" + title + ", cover=" + cover + ", maked=" + maked + ", cstar=" + cstar
-				+ ", comments=" + comments + ", contents=" + contents + ", dt=" + dt + "]";
+				+ ", comments=" + comments + ", contents=" + ", material=" + materials + ", step=" + steps
+				+ ", dt=" + dt + "]";
 	}
 	
 	
