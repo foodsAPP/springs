@@ -22,7 +22,7 @@ public class Cookbook implements Serializable {
 	private String title;
 	private String cover; //菜谱封面
 	private String maked; //菜谱被做过次数
-	private int cstar = 0; //菜谱被点赞数
+	private int cstar ; //菜谱被点赞数
 	private List<Comment> comments; //菜谱评论
 	private List<Content> contents; //菜谱主体内容（原料+步骤）
 	@JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
