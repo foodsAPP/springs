@@ -28,8 +28,6 @@ public class CookbookController {
 			LoggerFactory.getLogger(CookbookController.class);
 	@Autowired
 	private CookbookService service;
-//	@Autowired
-//	private UsersService userservice;
 	//查看菜谱首页所有菜谱
 	@GetMapping
 	public List<Cookbook> getAllcookbook() {
@@ -76,10 +74,17 @@ public class CookbookController {
 		return update;
 	}
 	//通过菜谱标题获取菜谱
-	@GetMapping("/s/{title}")
+	@GetMapping("/t/{title}")
 	public List<Cookbook> searchTitle(@PathVariable String title) {
 		System.out.println("即将寻找标题"+title);
 		List<Cookbook> t=service.searchTitle(title);
+		return t;
+	}
+	//通过用户名查找菜谱
+	@GetMapping("/c/{cover}")
+	public List<Cookbook> searchCover(@PathVariable String cover) {
+		System.out.println("即将寻找标题"+cover);
+		List<Cookbook> t=service.searchCover(cover);
 		return t;
 	}
 	//
