@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.example.demo.model.Comment;
@@ -74,17 +75,23 @@ public class CookbookController {
 		Cookbook update=service.updateCookbook(c);
 		return update;
 	}
-	//通过菜谱标题获取菜谱
+	//通过菜谱标题获取菜谱(只支持英文标题)
 	@GetMapping("/t/{title}")
 	public List<Cookbook> searchTitle(@PathVariable String title) {
-		System.out.println("即将寻找标题"+title);
+		System.out.println("即将寻找标题为："+title+" 的菜谱（英文）");
 		List<Cookbook> t=service.searchTitle(title);
 		return t;
+	}
+	//通过菜谱标题获取菜谱(中英文标题均支持)
+	@GetMapping("/ct")
+	public List<Cookbook> seachByTitle(@RequestParam String title) {
+		System.out.println("即将寻找标题为："+title+" 的菜谱");
+		return service.searchTitle(title);
 	}
 	//通过用户名查找菜谱
 	@GetMapping("/c/{cover}")
 	public List<Cookbook> searchCover(@PathVariable String cover) {
-		System.out.println("即将寻找封面"+cover);
+		System.out.println("即将寻找封面为"+cover+" 的菜谱");
 		List<Cookbook> t=service.searchCover(cover);
 		return t;
 	}
