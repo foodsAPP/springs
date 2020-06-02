@@ -12,4 +12,5 @@ import com.example.demo.model.Cookbook;
 public interface CookbookRepository extends MongoRepository<Cookbook,String>{
 	public List<Cookbook> findByCommentsDtAfter(LocalDateTime thedt);
 	List <Cookbook> findByTitle(String title);
+	List <Cookbook> findByCover(String cover);
 }

@@ -67,6 +67,7 @@ public class CookbookController {
 		Cookbook saved=service.createCookbook(c);
 		return saved;
 	}
+	//更新菜谱
 	@PutMapping
 	public Cookbook updateCookbook(@RequestBody Cookbook c) {
 		System.out.println("即将更新菜谱"+c);
@@ -83,7 +84,7 @@ public class CookbookController {
 	//通过用户名查找菜谱
 	@GetMapping("/c/{cover}")
 	public List<Cookbook> searchCover(@PathVariable String cover) {
-		System.out.println("即将寻找标题"+cover);
+		System.out.println("即将寻找封面"+cover);
 		List<Cookbook> t=service.searchCover(cover);
 		return t;
 	}

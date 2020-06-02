@@ -80,8 +80,13 @@ public class CookbookService {
 		}
 		 return repo.save(saved);
 	}
+	//通过菜谱标题查询
 	public List<Cookbook> searchTitle(String title) {
 		return repo.findByTitle(title);
+	}
+	//通过菜谱封面查询
+	public List<Cookbook> searchCover(String cover) {
+		return repo.findByCover(cover);
 	}
 	public List<Cookbook> getLastLocalDateTimeChannel() {
 		LocalDateTime now=LocalDateTime.now();
