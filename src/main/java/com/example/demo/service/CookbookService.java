@@ -26,12 +26,12 @@ public class CookbookService {
 	@Autowired
 	private CookbookRepository repo;
 
-	public List<Cookbook> getAllChannel() {
+	public List<Cookbook> getAllCookbook() {
 		logger.info("准备返回从数据库中正在返回打印全部信息：");
 		 return repo.findAll();
 	}
 	@Cacheable("cookbooks")
-	public Cookbook getChannel(String id) {
+	public Cookbook getCookbook(String id) {
 		logger.info("准备从数据库中正在返回打印全部信息："+id);
 		Optional<Cookbook> result=repo.findById(id);
 			   if (result.isPresent()) {
@@ -40,7 +40,7 @@ public class CookbookService {
 				   return null;
 	}
 	}
-	public boolean deleteChannel(String id) {
+	public boolean deleteCookbook(String id) {
 		boolean result=true;
 		repo.deleteById(id);
 		 return result;
@@ -51,7 +51,7 @@ public class CookbookService {
 	}
 	
 	public Cookbook updateCookbook(Cookbook c) {
-		Cookbook saved=getChannel(c.getId());
+		Cookbook saved=getCookbook(c.getId());
 		if(saved != null) {
 			if(c.getTitle() != null) {
 				saved.setTitle(c.getTitle());
@@ -88,14 +88,14 @@ public class CookbookService {
 	public List<Cookbook> searchCover(String cover) {
 		return repo.findByCover(cover);
 	}
-	public List<Cookbook> getLastLocalDateTimeChannel() {
+	public List<Cookbook> getLastLocalDateTimeCookbook() {
 		LocalDateTime now=LocalDateTime.now();
 		LocalDateTime today=LocalDateTime.of(now.getYear(),now.getMonthValue(),now.getDayOfMonth(),0,0);
 		return repo.findByCommentsDtAfter(today);
 	}
-	public List<Comment> hotComments(String channelId) {
+	public List<Comment> hotComments(String cookbookId) {
 		List<Comment> result=new ArrayList<>();
-		Cookbook saved=getChannel(channelId);
+		Cookbook saved=getCookbook(cookbookId);
 	    if(saved != null) {
 	    	saved.getComments().sort(new Comparator<Comment>() {
 
@@ -119,8 +119,8 @@ public class CookbookService {
 	    return result;
 	}
 	
-	public Cookbook addComment(String channelId, Comment comment) {
-		Cookbook saved=getChannel(channelId);
+	public Cookbook addComment(String cookbookId, Comment comment) {
+		Cookbook saved=getCookbook(cookbookId);
 	    if(saved != null) {
 	    	if(saved.getComments()==null) {
 				saved.setComments(new ArrayList<>());
@@ -130,8 +130,8 @@ public class CookbookService {
 	    }
 	    return null;
 	}
-	public Cookbook addMaterial(String channelId, Material material) {
-		Cookbook saved=getChannel(channelId);
+	public Cookbook addMaterial(String cookbookId, Material material) {
+		Cookbook saved=getCookbook(cookbookId);
 	    if(saved != null) {
 	    	if(saved.getMaterial()==null) {
 				saved.setMaterial(new ArrayList<>());
@@ -141,8 +141,8 @@ public class CookbookService {
 	    }
 	    return null;
 	}
-	public Cookbook addStep(String channelId, Step step) {
-		Cookbook saved=getChannel(channelId);
+	public Cookbook addStep(String cookbookId, Step step) {
+		Cookbook saved=getCookbook(cookbookId);
 	    if(saved != null) {
 	    	if(saved.getStep()==null) {
 				saved.setStep(new ArrayList<>());

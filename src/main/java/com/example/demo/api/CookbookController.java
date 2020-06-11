@@ -33,13 +33,13 @@ public class CookbookController {
 	@GetMapping
 	public List<Cookbook> getAllcookbook() {
 		logger.info("正在返回打印全部信息");
-		List<Cookbook>  books= service.getAllChannel();
+		List<Cookbook>  books= service.getAllCookbook();
 			return books;
 		}
 //	获取一个指定菜谱
 	@GetMapping("/{id}")
-	public  Cookbook  getChannel(@PathVariable String id) {
-		Cookbook c=service.getChannel(id);
+	public  Cookbook  getCookbook(@PathVariable String id) {
+		Cookbook c=service.getCookbook(id);
 		logger.info("正在打印"+id+"信息：");
 		if(c!=null) {
 			return c;
@@ -51,9 +51,9 @@ public class CookbookController {
 	}
 //	删除一个指定菜谱
 	@DeleteMapping("/{id}")
- public ResponseEntity<String> deleteChannel(@PathVariable String id){
+ public ResponseEntity<String> deleteCookbook(@PathVariable String id){
 		System.out.println("即将删除指定菜谱,id="+id);
-		boolean result=service.deleteChannel(id);
+		boolean result=service.deleteCookbook(id);
 		if(result) {
 			return ResponseEntity.ok().body("删除成功");
 		}else {
@@ -97,40 +97,40 @@ public class CookbookController {
 	}
 	//
 	@GetMapping("/hot")
-	public List<Cookbook> gethotChannel() {
-		return service.getLastLocalDateTimeChannel();
+	public List<Cookbook> gethotCookbooks() {
+		return service.getLastLocalDateTimeCookbook();
 	}
 	
 	//新增菜谱材料
-		@PostMapping("/{channelId}/material")
-		public Cookbook addMaterial(@PathVariable String channelId,@RequestBody Material material){
+		@PostMapping("/{cookbookId}/material")
+		public Cookbook addMaterial(@PathVariable String cookbookId,@RequestBody Material material){
 			Cookbook cmaterial = null;
 			//把评论保存到数据库
-	logger.debug("将为频道"+channelId+"新增一条评论"+material);
-	return service.addMaterial(channelId, material);
+	logger.debug("将为频道"+cookbookId+"新增一条评论"+material);
+	return service.addMaterial(cookbookId, material);
 		}
 	
 	//新增菜谱步骤
-		@PostMapping("/{channelId}/step")
-		public Cookbook addStep(@PathVariable String channelId,@RequestBody Step step){
+		@PostMapping("/{cookbookId}/step")
+		public Cookbook addStep(@PathVariable String cookbookId,@RequestBody Step step){
 			Cookbook cstep = null;
 			//把评论保存到数据库
-	logger.debug("将为频道"+channelId+"新增一条评论"+step);
-	return service.addStep(channelId, step);
+	logger.debug("将为频道"+cookbookId+"新增一条评论"+step);
+	return service.addStep(cookbookId, step);
 		}
 	//新增菜谱评论
-	@PostMapping("/{channelId}/comment")
-	public Cookbook addComment(@PathVariable String channelId,@RequestBody Comment comment){
+	@PostMapping("/{cookbookId}/comment")
+	public Cookbook addComment(@PathVariable String cookbookId,@RequestBody Comment comment){
 		Cookbook result = null;
 		//把评论保存到数据库
-logger.debug("将为频道"+channelId+"新增一条评论"+comment);
-return service.addComment(channelId, comment);
+logger.debug("将为频道"+cookbookId+"新增一条评论"+comment);
+return service.addComment(cookbookId, comment);
 	}
 	//获取菜谱的热门评论
-	@GetMapping("/{channelId}/hotcomments")
-	public List<Comment> hotComments(@PathVariable String channelId){
-		logger.debug("获取热门评论降为频道"+channelId);
-		List<Comment> hotcomment=service.hotComments(channelId);
+	@GetMapping("/{cookbookId}/hotcomments")
+	public List<Comment> hotComments(@PathVariable String cookbookId){
+		logger.debug("获取热门评论降为频道"+cookbookId);
+		List<Comment> hotcomment=service.hotComments(cookbookId);
 		return hotcomment;
 //		return service.hotComments();
 	}
